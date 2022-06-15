@@ -8,6 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Subscription_Proj.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.AspNetCore.Identity;
 
 namespace Subscription_Proj
 {
@@ -24,12 +28,16 @@ namespace Subscription_Proj
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<ISubsRepository, SubsRepository>();
+            services.AddScoped<ISubsRepository, DBSubscription>();
+
+            services.AddDbContext<SubscriptionInfoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(SubscriptionInfoContext subscriptionInfoContext, IApplicationBuilder app, IWebHostEnvironment env)
         {
+            subscriptionInfoContext.Database.EnsureCreated();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

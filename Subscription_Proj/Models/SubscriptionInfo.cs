@@ -1,4 +1,7 @@
-﻿namespace Subscription_Proj.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Subscription_Proj.Models
 {
     public class SubscriptionInfo
     {
@@ -10,6 +13,8 @@
             SubPeriod=subPeriod;
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SubscriptionId { get; set; }
         public string SubscriptionName { get; set; }
         public double UnitPrice { get; set; }
