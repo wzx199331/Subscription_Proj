@@ -50,6 +50,15 @@ namespace Subscription_Proj.Services
             sub.SubscriptionName = subscriptionInfo.SubscriptionName;
             sub.UnitPrice = subscriptionInfo.UnitPrice;
             sub.SubPeriod = subscriptionInfo.SubPeriod;
+            sub.StartDate = subscriptionInfo.StartDate;
+            sub.daysUsed = subscriptionInfo.updateDaysUsed();
+            subscriptionInfoContext.SaveChanges();
+        }
+
+        public void UpdateUsedDays()
+        {
+            foreach (SubscriptionInfo s in subscriptionInfoContext.Subscriptions)
+               s.daysUsed = s.updateDaysUsed();
             subscriptionInfoContext.SaveChanges();
         }
     }

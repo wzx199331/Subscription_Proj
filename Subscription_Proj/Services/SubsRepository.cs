@@ -10,9 +10,11 @@ namespace Subscription_Proj.Services
         public SubsRepository()
         {
             _subscriptions = new List<SubscriptionInfo>();
+            /*
             _subscriptions.Add(new SubscriptionInfo(0, "Netflix", 9.99, "Monthly"));
             _subscriptions.Add(new SubscriptionInfo(1, "Hulu", 12.99, "Monthly"));
             _subscriptions.Add(new SubscriptionInfo(2, "PS PLUS", 120.00, "Annualy"));
+            */
         }
         public void AddSubscription(SubscriptionInfo subscriptionInfo)
         {
@@ -40,6 +42,11 @@ namespace Subscription_Proj.Services
         }
 
         public void UpdateSubscription(SubscriptionInfo subscriptionInfo)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateUsedDays()
         {
             throw new System.NotImplementedException();
         }

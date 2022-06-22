@@ -31,11 +31,24 @@ namespace Subscription_Proj
             services.AddScoped<ISubsRepository, DBSubscription>();
 
             services.AddDbContext<SubscriptionInfoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<UserContext>();
+
+            services.AddDbContext<UserContext>(options => options.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;" +
+                "Database=UserSubsDB;" +
+                "Trusted_Connection = true;" +
+                "MultipleActiveResultSets=true"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(SubscriptionInfoContext subscriptionInfoContext, IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(UserContext userContext, SubscriptionInfoContext subscriptionInfoContext, IApplicationBuilder app, IWebHostEnvironment env)
         {
+            userContext.Database.EnsureDeleted();
+            userContext.Database.EnsureCreated();
+            //subscriptionInfoContext.Database.EnsureDeleted();
             subscriptionInfoContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())

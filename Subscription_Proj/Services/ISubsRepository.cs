@@ -11,6 +11,6 @@ namespace Subscription_Proj.Services
         public void UpdateSubscription(SubscriptionInfo subscriptionInfo);
         public bool HasSub(int id);
         public bool DeleteSub(int id);
-
+        public void UpdateUsedDays();
     }
 }
