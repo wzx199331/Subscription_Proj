@@ -5,7 +5,7 @@ namespace Subscription_Proj.Services
 {
     public interface ISubsRepository
     {
-        public List<SubscriptionInfo> GetAllSubs();
+        public List<SubscriptionInfo> GetAllSubs(string userId);
         public SubscriptionInfo GetSubscription(int id);
         public void AddSubscription(SubscriptionInfo subscriptionInfo);
         public void UpdateSubscription(SubscriptionInfo subscriptionInfo);

@@ -22,8 +22,10 @@ namespace Subscription_Proj.Models
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SubscriptionId { get; set; }
+
+        public string userId { get; set; }
         public string SubscriptionName { get; set; }
         public Category category { get; set; }
         public double UnitPrice { get; set; }

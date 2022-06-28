@@ -46,7 +46,7 @@ namespace Subscription_Proj
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(UserContext userContext, SubscriptionInfoContext subscriptionInfoContext, IApplicationBuilder app, IWebHostEnvironment env)
         {
-            userContext.Database.EnsureDeleted();
+            //userContext.Database.EnsureDeleted();
             userContext.Database.EnsureCreated();
             //subscriptionInfoContext.Database.EnsureDeleted();
             subscriptionInfoContext.Database.EnsureCreated();
@@ -60,6 +60,8 @@ namespace Subscription_Proj
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

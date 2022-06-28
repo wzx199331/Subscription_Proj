@@ -11,6 +11,7 @@ namespace Subscription_Proj.Models
 
         public DbSet<SubscriptionInfo> Subscriptions { get; set; }
 
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SubscriptionInfo>().HasData(
@@ -19,5 +20,6 @@ namespace Subscription_Proj.Models
                 new SubscriptionInfo(2, "PS PLUS", 120.00, "Annualy", "2022-01-01", Category.Game)
                 );
         }
+        */
     }
 }

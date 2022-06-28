@@ -26,7 +26,7 @@ namespace Subscription_Proj.Services
             throw new System.NotImplementedException();
         }
 
-        public List<SubscriptionInfo> GetAllSubs()
+        public List<SubscriptionInfo> GetAllSubs(string userId)
         {
             return _subscriptions;
         }

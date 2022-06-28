@@ -20,10 +20,9 @@ namespace Subscription_Proj.Controllers
         [Authorize(Roles ="Customer")]
         public IActionResult ShowSubs()
         {
-            //AllSubViewModel model = new AllSubViewModel();
-            //model.subs = _subsRepository.GetAllSubs();
-            _subsRepository.UpdateUsedDays();
-            return View(_subsRepository.GetAllSubs());
+            AllSubViewModel model = new AllSubViewModel();
+            model.subs = _subsRepository.GetAllSubs(this.User.Identity.Name);
+            return View(model.subs);
         }
 
         [HttpGet]
@@ -65,6 +64,7 @@ namespace Subscription_Proj.Controllers
         {
             if(ModelState.IsValid)
             {
+                subscriptionInfo.userId = this.User.Identity.Name;
                 _subsRepository.AddSubscription(subscriptionInfo);
                 ViewBag.Message = "New Subscription Added";
             }

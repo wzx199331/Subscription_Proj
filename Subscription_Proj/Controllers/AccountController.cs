@@ -25,7 +25,6 @@ namespace Subscription_Proj.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult Login()
         {
             if (this.User.Identity.IsAuthenticated)
@@ -52,6 +51,7 @@ namespace Subscription_Proj.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
             if(ModelState.IsValid)

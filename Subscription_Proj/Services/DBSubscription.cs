@@ -1,5 +1,6 @@
 ﻿using Subscription_Proj.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Subscription_Proj.Services
 {
@@ -18,30 +19,42 @@ namespace Subscription_Proj.Services
 
         public bool DeleteSub(int id)
         {
-            var sub = subscriptionInfoContext.Subscriptions.Find(id);
+            var sub = (from SubscriptionInfo in subscriptionInfoContext.Subscriptions
+                       where SubscriptionInfo.SubscriptionId == id
+                       select SubscriptionInfo).ToList();
+
             if(sub != null)
             {
-                subscriptionInfoContext.Subscriptions.Remove(sub);
+                subscriptionInfoContext.Subscriptions.Remove(sub[0]);
                 subscriptionInfoContext.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        public List<SubscriptionInfo> GetAllSubs()
+        public List<SubscriptionInfo> GetAllSubs(string userId)
         {
-            return new List<SubscriptionInfo>(subscriptionInfoContext.Subscriptions);
+            var subList = (from SubscriptionInfo in subscriptionInfoContext.Subscriptions
+                           where SubscriptionInfo.userId == userId
+                           select SubscriptionInfo
+                           ).ToList();
+            return subList;
         }
 
         public SubscriptionInfo GetSubscription(int id)
         {
-            var sub = subscriptionInfoContext.Subscriptions.Find(id);
-            return sub != null ? sub : null;
+            var sub = (from SubscriptionInfo in subscriptionInfoContext.Subscriptions
+                       where SubscriptionInfo.SubscriptionId == id
+                       select SubscriptionInfo).ToList();
+            return sub[0];
         }
 
         public bool HasSub(int id)
         {
-            return subscriptionInfoContext.Subscriptions.Find(id) != null;
+            var sub = (from SubscriptionInfo in subscriptionInfoContext.Subscriptions
+                       where SubscriptionInfo.SubscriptionId == id
+                       select SubscriptionInfo).ToList();
+            return sub != null;
         }
 
         public void UpdateSubscription(SubscriptionInfo subscriptionInfo)
@@ -52,6 +65,7 @@ namespace Subscription_Proj.Services
             sub.SubPeriod = subscriptionInfo.SubPeriod;
             sub.StartDate = subscriptionInfo.StartDate;
             sub.daysUsed = subscriptionInfo.updateDaysUsed();
+            sub.userId = subscriptionInfo.userId;
             subscriptionInfoContext.SaveChanges();
         }
 
