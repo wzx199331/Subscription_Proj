@@ -10,8 +10,18 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SubscriptionId" class="control-label"></label>
+                <input asp-for="SubscriptionId" class="form-control" readonly />
+                <span asp-validation-for="SubscriptionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userId" class="control-label"></label>
+                <input asp-for="userId" class="form-control" readonly />
+                <span asp-validation-for="userId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="SubscriptionName" class="control-label"></label>
                 <input asp-for="SubscriptionName" class="form-control" />

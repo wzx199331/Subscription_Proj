@@ -13,6 +13,8 @@ namespace Subscription_Proj.Services
         }
         public void AddSubscription(SubscriptionInfo subscriptionInfo)
         {
+            //subscriptionInfo.SubscriptionId = subscriptionInfoContext.Subscriptions.Count() + 1;
+            
             subscriptionInfoContext.Subscriptions.Add(subscriptionInfo);
             subscriptionInfoContext.SaveChanges();
         }
@@ -38,6 +40,7 @@ namespace Subscription_Proj.Services
                            where SubscriptionInfo.userId == userId
                            select SubscriptionInfo
                            ).ToList();
+            UpdateUsedDays();
             return subList;
         }
 
@@ -59,7 +62,13 @@ namespace Subscription_Proj.Services
 
         public void UpdateSubscription(SubscriptionInfo subscriptionInfo)
         {
+            /*
+            var subs = (from SubscriptionInfo in subscriptionInfoContext.Subscriptions
+                       where SubscriptionInfo.SubscriptionId == subscriptionInfo.SubscriptionId
+                       select SubscriptionInfo).ToList();
+            */
             var sub = subscriptionInfoContext.Subscriptions.Find(subscriptionInfo.SubscriptionId);
+            //sub.SubscriptionId = subscriptionInfo.SubscriptionId;
             sub.SubscriptionName = subscriptionInfo.SubscriptionName;
             sub.UnitPrice = subscriptionInfo.UnitPrice;
             sub.SubPeriod = subscriptionInfo.SubPeriod;

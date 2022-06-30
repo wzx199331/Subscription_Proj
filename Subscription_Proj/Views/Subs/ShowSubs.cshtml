@@ -4,12 +4,12 @@
     ViewData["Title"] = "ShowSubs";
 }
 
-<h1>ShowSubs</h1>
+<h1>Subscription List</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-striped" >
     <thead>
         <tr>
             <th>
@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.daysUsed)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.SubscriptionId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.SubscriptionId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.SubscriptionId })
             </td>
         </tr>
 }
